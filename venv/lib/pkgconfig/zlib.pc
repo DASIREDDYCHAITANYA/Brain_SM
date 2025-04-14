@@ -1,0 +1,13 @@
+prefix=/Users/chaitanya/Brain_SM/venv
+exec_prefix=/Users/chaitanya/Brain_SM/venv
+libdir=/Users/chaitanya/Brain_SM/venv/lib
+sharedlibdir=/Users/chaitanya/Brain_SM/venv/lib
+includedir=/Users/chaitanya/Brain_SM/venv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
