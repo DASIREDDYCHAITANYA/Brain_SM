@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sentiment Score (Past 24 Hours)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      text-align: center;
+      background: #f7f7f7;
+      font-family: Arial;
+    }
+    canvas {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Sentiment Score (Past 24 Hours)</h2>
+  <canvas id="sentimentChart" width="800" height="400"></canvas>
+
+  <script>
+    fetch("sentiment_data.json?" + new Date().getTime())
+      .then(res => res.json())
+      .then(data => {
+        const labels = data.map((_, i) => `Comment ${i + 1}`);
+        const scores = data.map(d => d.sentiment_score);
+
+        const ctx = document.getElementById('sentimentChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: labels,
+            datasets: [{
+              label: 'Sentiment Score',
+              data: scores,
+              borderColor: '#007bff',
+              backgroundColor: 'rgba(0, 123, 255, 0.1)',
+              tension: 0,
+              borderWidth: 2,
+              pointRadius: 3
+            }]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              y: {
+                min: -1,
+                max: 1,
+                title: {
+                  display: true,
+                  text: 'Sentiment Polarity'
+                }
+              }
+            }
+          }
+        });
+      });
+  </script>
+</body>
+</html>
