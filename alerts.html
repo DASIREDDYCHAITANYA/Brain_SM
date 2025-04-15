@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reddit Insights Dashboard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .tab-buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tab-buttons button {
+      padding: 10px 20px;
+      margin: 0 10px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .tab-buttons button:hover {
+      background-color: #0056b3;
+    }
+
+    .tab-content {
+      display: none;
+      max-width: 800px;
+      margin: auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .alert-card {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .alert-card:last-child {
+      border-bottom: none;
+    }
+
+    .alert-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .alert-text {
+      margin-top: 5px;
+      color: #444;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Reddit Comment Analysis</h1>
+
+  <div class="tab-buttons">
+    <button onclick="showTab('summary')">📋 Summary</button>
+    <button onclick="showTab('alerts')">🚨 Alerts</button>
+  </div>
+
+  <div id="summary" class="tab-content">
+    <h2>📋 Summary Report</h2>
+    <pre id="summary-content">Loading...</pre>
+  </div>
+
+  <div id="alerts" class="tab-content">
+    <h2>🚨 Alerts from Comments</h2>
+    <div id="alerts-container">Loading...</div>
+  </div>
+
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Show Summary by default
+    showTab('summary');
+
+    // Load summary
+    fetch('summary.txt')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('summary-content').textContent = data;
+      });
+
+    // Load alerts
+    fetch('alerts.json')
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById('alerts-container');
+        container.innerHTML = "";
+        data.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'alert-card';
+          card.innerHTML = `
+            <div class="alert-title">🗓️ ${item.Date} | 👍 ${item.upvotes}</div>
+            <div class="alert-text"><strong>Preview:</strong> ${item["Content Preview"]}</div>
+            <div class="alert-text"><strong>Alerts:</strong> ${item.Alerts}</div>
+          `;
+          container.appendChild(card);
+        });
+      });
+  </script>
+
+</body>
+</html>
