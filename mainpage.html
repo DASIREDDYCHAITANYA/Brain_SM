@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain SM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f9fafb;
+        }
+
+        .video-section {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+        }
+
+        .video-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 6%;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            background: #7c3aed;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .brand-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-items {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: #f1f5f9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .nav-item:hover {
+            color: #a78bfa;
+        }
+
+        .video-content {
+            display: flex;
+            flex: 1;
+            align-items: center;
+            padding: 0 6%;
+        }
+
+        .info-section {
+            max-width: 600px;
+        }
+
+        .headline {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .subtext {
+            color: #e5e7eb;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .user-stats {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: #d1d5db;
+            font-size: 1rem;
+        }
+
+        .connect-button {
+            padding: 12px 24px;
+            background: #7c3aed;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .connect-button:hover {
+            background: #6d28d9;
+        }
+
+        .features-section {
+            padding: 80px 6%;
+            background-color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-box {
+            background: #1a365d;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-box i {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #a0c4ff;
+        }
+
+        .feature-box h3 {
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .footer {
+            background-color: #111827;
+            color: #e5e7eb;
+            padding: 3rem 6%;
+        }
+
+        .footer-inner {
+            display: flex;
+            max-width: 1100px;
+            margin: 0 auto;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            color: #9ca3af;
+        }
+
+        .footer-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-nav a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .headline {
+                font-size: 2rem;
+            }
+
+            .nav-items {
+                gap: 1rem;
+            }
+
+            .video-content {
+                padding: 0 3%;
+            }
+
+            .top-bar {
+                padding: 1.5rem 3%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="video-section">
+        <video class="video-bg" autoplay muted loop>
+            <source src="brain2.mp4" type="video/mp4">
+        </video>
+        
+        <div class="video-overlay">
+            <div class="top-bar">
+                <div class="brand">
+                    <div class="logo"><i class="fas fa-brain"></i></div>
+                    <div class="brand-text">Brain SM</div>
+                </div>
+                <div class="nav-items">
+                    <a href="profile.html" class="nav-item">Profile</a>
+                    <a href="about.html" class="nav-item">About</a>
+                    
+                </div>
+            </div>
+
+            <div class="video-content">
+                <div class="info-section">
+                    <h1 class="headline">Brain SM</h1>
+                    <p class="subtext">
+                        An AI-driven digital companion designed for your mind
+                    </p>
+                    <div class="user-stats">
+                        <i class="fas fa-users"></i>
+                        <span>Over 10,000 global members and counting</span>
+                    </div>
+                    <button class="connect-button">
+                        Connect with Social Media
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="features-grid">
+            <a href="dashboard.html" class="feature-box">
+                <i class="fas fa-tachometer-alt"></i>
+                <h3>Dashboard</h3>
+            </a>
+            <a href="reports.html" class="feature-box">
+                <i class="fas fa-chart-bar"></i>
+                <h3>Reports</h3>
+            </a>
+            <a href="alerts.html" class="feature-box">
+                <i class="fas fa-bell"></i>
+                <h3>Alerts</h3>
+            </a>
+            <a href="stats.html" class="feature-box">
+                <i class="fas fa-chart-line"></i>
+                <h3>Daily Stats</h3>
+            </a>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <p class="footer-text">© 2025 Brain SM. All rights reserved.</p>
+            <div class="footer-nav">
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Combined Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .date-filter {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    iframe {
+      width: 49%;
+      height: 800px;
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    input[type="date"] {
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1> Activities Dashboards</h1>
+
+  <div class="date-filter">
+    <label for="from">From:</label>
+    <input type="date" id="from">
+    <label for="to">To:</label>
+    <input type="date" id="to">
+    <button onclick="updateIframes()">Update</button>
+  </div>
+
+  <div class="dashboard">
+    <iframe id="iframe-upvotes" src="http://localhost:5601/app/dashboards#/view/c2537eb0-1a90-11f0-9cbf-f198aa780b8a?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2020-04-15T18:30:00.000Z',to:'2024-12-21T18:30:00.000Z'))&_a=(description:'',expandedPanelId:'87de0e82-9187-4c61-8b8d-baa54a6f595f',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,syncColors:!f,useMargins:!t),panels:!((embeddableConfig:(attributes:(description:'',references:!((id:'322e3ff0-1a90-11f0-9cbf-f198aa780b8a',name:indexpattern-datasource-current-indexpattern,type:index-pattern),(id:'322e3ff0-1a90-11f0-9cbf-f198aa780b8a',name:indexpattern-datasource-layer-1971b26b-fa04-42ac-ade3-d0c11716ec97,type:index-pattern)),state:(datasourceStates:(indexpattern:(layers:('1971b26b-fa04-42ac-ade3-d0c11716ec97':(columnOrder:!('5c5a3976-4490-4ee5-9e74-b5222d1c2eff','788e4a66-11d9-4583-bead-3399bbbcf968'),columns:('5c5a3976-4490-4ee5-9e74-b5222d1c2eff':(customLabel:!f,dataType:date,isBucketed:!t,label:date,operationType:date_histogram,params:(interval:auto),scale:interval,sourceField:date),'788e4a66-11d9-4583-bead-3399bbbcf968':(customLabel:!t,dataType:number,isBucketed:!f,label:Likes,operationType:sum,scale:ratio,sourceField:upvotes)),incompleteColumns:())))),filters:!(),query:(language:kuery,query:''),visualization:(layers:!((accessors:!('788e4a66-11d9-4583-bead-3399bbbcf968'),layerId:'1971b26b-fa04-42ac-ade3-d0c11716ec97',layerType:data,position:top,seriesType:line,showGridlines:!f,xAccessor:'5c5a3976-4490-4ee5-9e74-b5222d1c2eff')),legend:(isVisible:!t,position:right),preferredSeriesType:bar_stacked,title:'Empty%20XY%20chart',valueLabels:hide,yLeftExtent:(mode:full),yRightExtent:(mode:full))),title:'date%20vs%20upvotes',type:lens,visualizationType:lnsXY),enhancements:()),gridData:(h:15,i:'87de0e82-9187-4c61-8b8d-baa54a6f595f',w:24,x:0,y:0),panelIndex:'87de0e82-9187-4c61-8b8d-baa54a6f595f',type:lens,version:'7.17.0'))&hide-filter-bar=true"></iframe>
+
+    <iframe id="iframe-sentiment" src="http://localhost:5601/app/dashboards#/view/999384c0-1a90-11f0-9cbf-f198aa780b8a?embed=true&_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:'2020-04-15T18:30:00.000Z',to:'2024-12-21T18:30:00.000Z'))&_a=(description:'',expandedPanelId:'5d22695c-f186-45ac-a6f4-f9ea6a125e67',filters:!(),fullScreenMode:!f,options:(hidePanelTitles:!f,syncColors:!f,useMargins:!t),panels:!((embeddableConfig:(attributes:(description:'',references:!((id:'322e3ff0-1a90-11f0-9cbf-f198aa780b8a',name:indexpattern-datasource-current-indexpattern,type:index-pattern),(id:'322e3ff0-1a90-11f0-9cbf-f198aa780b8a',name:indexpattern-datasource-layer-9b5cf53f-1186-4bd9-85f1-1a6f06e79c5a,type:index-pattern)),state:(datasourceStates:(indexpattern:(layers:('9b5cf53f-1186-4bd9-85f1-1a6f06e79c5a':(columnOrder:!('4b060939-f082-4330-8a33-caf21c678d00',ced5c93e-1a8f-4666-9e23-1756d64da43a),columns:('4b060939-f082-4330-8a33-caf21c678d00':(dataType:date,isBucketed:!t,label:date,operationType:date_histogram,params:(interval:auto),scale:interval,sourceField:date),ced5c93e-1a8f-4666-9e23-1756d64da43a:(customLabel:!t,dataType:number,isBucketed:!f,label:'Activity%20score',operationType:average,scale:ratio,sourceField:sentiment_score)),incompleteColumns:())))),filters:!(),query:(language:kuery,query:''),visualization:(layers:!((accessors:!(ced5c93e-1a8f-4666-9e23-1756d64da43a),layerId:'9b5cf53f-1186-4bd9-85f1-1a6f06e79c5a',layerType:data,position:top,seriesType:bar_stacked,showGridlines:!f,xAccessor:'4b060939-f082-4330-8a33-caf21c678d00')),legend:(isVisible:!t,position:right),preferredSeriesType:bar_stacked,title:'Empty%20XY%20chart',valueLabels:hide,yLeftExtent:(mode:full),yRightExtent:(mode:full))),title:'date%20vs%20sentiment%20',type:lens,visualizationType:lnsXY),enhancements:()),gridData:(h:15,i:'5d22695c-f186-45ac-a6f4-f9ea6a125e67',w:24,x:0,y:0),panelIndex:'5d22695c-f186-45ac-a6f4-f9ea6a125e67',type:lens,version:'7.17.0'))&hide-filter-bar=true"></iframe>
+  </div>
+
+  <script>
+    function updateIframes() {
+      const fromInput = document.getElementById('from').value;
+      const toInput = document.getElementById('to').value;
+
+      if (!fromInput || !toInput) {
+        alert("Please select both dates!");
+        return;
+      }
+
+      const from = new Date(fromInput).toISOString();
+      const to = new Date(toInput).toISOString();
+
+      const sentimentURL = `http://localhost:5601/app/dashboards#/view/999384c0-1a90-11f0-9cbf-f198aa780b8a?embed=true&_g=(time:(from:'${from}',to:'${to}'))`;
+      const upvotesURL = `http://localhost:5601/app/dashboards#/view/c2537eb0-1a90-11f0-9cbf-f198aa780b8a?embed=true&_g=(time:(from:'${from}',to:'${to}'))`;
+
+      document.getElementById('iframe-sentiment').src = sentimentURL;
+      document.getElementById('iframe-upvotes').src = upvotesURL;
+    }
+  </script>
+</body>
+</html>
